@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { LocationObject, LocationGeocodedAddress, requestPermissionsAsync, getCurrentPositionAsync, reverseGeocodeAsync } from 'expo-location';
-
 import { Image, ActivityIndicator } from 'react-native';
+
+import { LocationObject, LocationGeocodedAddress } from 'expo-location';
+import getLocation from '../../utils/GetLocation';
 
 import {
   Container,
@@ -23,22 +24,18 @@ const Splash: React.FunctionComponent<iSplash> = ({ setLoading, setLocation }) =
 
   useEffect(() => {
     (async () => {
-      let { status } = await requestPermissionsAsync();
+      const response = await getLocation();
 
-      if (status !== 'granted') {
-        alert('Permission to access location was denied');
+      if (response) {
+        setAdress(response.adress)
+        setLocation(response.currentPosition);
 
-        return;
-      }
-
-      let currentPosition = await getCurrentPositionAsync({ accuracy: 4 });
-
-      setAdress(await reverseGeocodeAsync({ latitude: currentPosition.coords.latitude, longitude: currentPosition.coords.longitude }));
-
-      setTimeout(() => {
-        setLocation(currentPosition);
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
+      } else {
         setLoading(false);
-      }, 3000);
+      }
     })();
   }, []);
 
