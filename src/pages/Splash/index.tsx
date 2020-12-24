@@ -2,8 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { Image, ActivityIndicator } from 'react-native';
 
-import { LocationObject, LocationGeocodedAddress } from 'expo-location';
+import { LocationGeocodedAddress } from 'expo-location';
 import getLocation from '../../utils/GetLocation';
+
+import { useNavigation, CommonActions } from '@react-navigation/native';
 
 import {
   Container,
@@ -14,13 +16,10 @@ import {
   State
 } from "./styles";
 
-interface iSplash {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-  setLocation: React.Dispatch<React.SetStateAction<LocationObject | undefined>>
-}
-
-const Splash: React.FunctionComponent<iSplash> = ({ setLoading, setLocation }) => {
+const Splash: React.FunctionComponent = () => {
   const [adress, setAdress] = useState<LocationGeocodedAddress[]>([]);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -28,13 +27,20 @@ const Splash: React.FunctionComponent<iSplash> = ({ setLoading, setLocation }) =
 
       if (response) {
         setAdress(response.adress)
-        setLocation(response.currentPosition);
 
         setTimeout(() => {
-          setLoading(false);
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [
+                {
+                  name: 'Landing',
+                  params: { 'location': response.currentPosition }
+                },
+              ]
+            })
+          )
         }, 3000);
-      } else {
-        setLoading(false);
       }
     })();
   }, []);
