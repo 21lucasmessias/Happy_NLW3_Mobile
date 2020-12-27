@@ -16,7 +16,7 @@ import {
   State
 } from "./styles";
 
-const Splash: React.FunctionComponent = () => {
+const Splash: React.FC = () => {
   const [adress, setAdress] = useState<LocationGeocodedAddress[]>([]);
 
   const navigation = useNavigation();
@@ -35,7 +35,7 @@ const Splash: React.FunctionComponent = () => {
               routes: [
                 {
                   name: 'Landing',
-                  params: { 'location': response.currentPosition }
+                  params: response.currentPosition
                 },
               ]
             })

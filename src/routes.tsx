@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Landing from './pages/Landing';
 import Splash from './pages/Splash';
+import AddOrphanage from './pages/AddOrphanage';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,9 +17,12 @@ function Routes() {
     <>
       <StatusBar style='dark' />
       <NavigationContainer >
-        <Navigator initialRouteName='Splash'>
+        <Navigator initialRouteName='AddOrphanage'>
           <Screen name='Splash' component={Splash} options={{ headerShown: false }} />
           <Screen name='Landing' component={Landing} options={{ headerShown: false }} />
+          <Screen name='AddOrphanage' component={AddOrphanage} options={{
+            title: 'Adicione um orfanato'
+          }} />
         </Navigator>
       </NavigationContainer>
     </>
