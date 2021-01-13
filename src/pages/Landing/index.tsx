@@ -62,7 +62,7 @@ const Landing: React.FC = () => {
         <TextOrphanagesFound>
           2 Orfanatos Encontrados
         </TextOrphanagesFound>
-        <AddOrphanage onPress={() => navigation.navigate('AddOrphanage')}>
+        <AddOrphanage onPress={() => navigation.navigate('SetOrphanageLocation', currentPosition)} activeOpacity={0.8}>
           <Entypo name='plus' size={15} color='#fff' />
         </AddOrphanage>
       </Footer>

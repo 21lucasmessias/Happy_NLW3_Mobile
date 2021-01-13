@@ -1,5 +1,8 @@
+import { useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
+import { LatLng } from 'react-native-maps';
 
+import FormImages from '../../components/FormImages';
 import Switch from '../../components/Switch';
 
 import {
@@ -9,17 +12,24 @@ import {
   Legend,
   FormBox,
   Label,
+  TextBox,
+  InfoText,
   TextInput,
   TextArea,
-  FormImages,
   WeekendWrapper,
   TextWeekend,
   FormButton,
   TextButton,
 } from './styles';
 
-const AddOrphanage: React.FC = () => {
+
+
+const CreateOrphanage: React.FC = () => {
   const [weekend, SetWeekend] = useState(false);
+  const [images, setImages] = useState<Array<string>>([]);
+
+  const route = useRoute();
+  const orphanageLocation = (route.params as LatLng);
 
   return (
     <Container>
@@ -35,7 +45,10 @@ const AddOrphanage: React.FC = () => {
           </FormBox>
 
           <FormBox>
-            <Label>Sobre</Label>
+            <TextBox>
+              <Label>Sobre</Label>
+              <InfoText>Máximo de 300 catacteres</InfoText>
+            </TextBox>
             <TextArea />
           </FormBox>
 
@@ -44,9 +57,7 @@ const AddOrphanage: React.FC = () => {
             <TextInput />
           </FormBox>
 
-          <FormImages>
-            <Label>Fotos</Label>
-          </FormImages>
+          <FormImages images={images} setImages={setImages} />
 
           <Legend>
             Visitação
@@ -76,4 +87,4 @@ const AddOrphanage: React.FC = () => {
   )
 }
 
-export default AddOrphanage;
+export default CreateOrphanage;

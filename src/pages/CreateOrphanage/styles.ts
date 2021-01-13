@@ -42,6 +42,20 @@ export const Label = styled.Text`
   padding-bottom: 8px;
 `;
 
+export const TextBox = styled.View`
+  flex-direction: row;
+
+  justify-content: space-between;
+`;
+
+export const InfoText = styled.Text`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 20px;
+  color: #8FA7B3;
+`;
+
 export const TextInput = styled.TextInput`
   border: 1px solid #D3E2E6;
   border-radius: 20px;
@@ -57,10 +71,6 @@ export const TextInput = styled.TextInput`
 export const TextArea = styled(TextInput)`
   height: 111px;
 `
-
-export const FormImages = styled.View`
-  padding-top: 32px;
-`;
 
 export const WeekendWrapper = styled.View`
   flex: 1;
@@ -78,9 +88,6 @@ export const TextWeekend = styled.Text`
   font-size: 15px;
   line-height: 20px;
   color: #8FA7B3;
-`;
-
-export const Switch = styled.Switch`
 `;
 
 export const FormButton = styled.TouchableOpacity`
