@@ -9,7 +9,7 @@ export const Container = styled.View`
 export const ScrollView = styled.ScrollView`
 `;
 
-export const Form = styled.View`
+export const FormContainer = styled.View`
   padding: 24px;
   padding-bottom: 40px;
 `;
@@ -55,22 +55,6 @@ export const InfoText = styled.Text`
   line-height: 20px;
   color: #8FA7B3;
 `;
-
-export const TextInput = styled.TextInput`
-  border: 1px solid #D3E2E6;
-  border-radius: 20px;
-
-  padding-left: 24px;
-  padding-right: 24px;
-
-  height: 56px;
-
-  background-color: #FFFFFF;
-`;
-
-export const TextArea = styled(TextInput)`
-  height: 111px;
-`
 
 export const WeekendWrapper = styled.View`
   flex: 1;
