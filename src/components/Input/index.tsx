@@ -11,7 +11,7 @@ interface iInput extends TextInputProps {
 }
 
 const Input: React.FC<iInput> = ({ name, textArea, ...rest }) => {
-  const refInput = useRef<TextInput | null>(null);
+  const refInput = useRef<TextInput>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
@@ -24,9 +24,27 @@ const Input: React.FC<iInput> = ({ name, textArea, ...rest }) => {
 
   return (
     textArea ?
-      <TextArea ref={refInput} {...rest} />
+      <TextArea
+        ref={refInput}
+        defaultValue={defaultValue}
+        onChangeText={(value: string) => {
+          if (refInput.current) {
+            (refInput.current as TextInputProps).value = value;
+          }
+        }}
+        {...rest}
+      />
       :
-      <TextLine ref={refInput} {...rest} />
+      <TextLine
+        ref={refInput}
+        defaultValue={defaultValue}
+        onChangeText={(value: string) => {
+          if (refInput.current) {
+            (refInput.current as TextInputProps).value = value;
+          }
+        }}
+        {...rest}
+      />
   );
 }
 

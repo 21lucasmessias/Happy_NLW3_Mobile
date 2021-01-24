@@ -1,5 +1,5 @@
 import { useRoute } from '@react-navigation/native';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LatLng } from 'react-native-maps';
 
 import { Form } from '@unform/mobile';
@@ -22,21 +22,26 @@ import {
   FormButton,
   TextButton,
 } from './styles';
+import { FormHandles, SubmitHandler } from '@unform/core';
 
 const CreateOrphanage: React.FC = () => {
+  const route = useRoute();
+  const orphanageLocation = (route.params as LatLng);
+
   const [weekend, SetWeekend] = useState(false);
   const [images, setImages] = useState<Array<string>>([]);
 
-  const [isEmpty, setIsEmpty] = useState(true);
+  const refForm = useRef<FormHandles>(null);
 
-  const route = useRoute();
-  const orphanageLocation = (route.params as LatLng);
+  const handleSubmit: SubmitHandler<FormHandles> = data => {
+    console.log(data);
+  }
 
   return (
     <Container>
       <ScrollView>
         <FormContainer>
-          <Form onSubmit={() => { }}>
+          <Form ref={refForm} onSubmit={handleSubmit}>
             <Legend>
               Dados
             </Legend>
@@ -56,7 +61,7 @@ const CreateOrphanage: React.FC = () => {
 
             <FormBox>
               <Label>Número do WhatsApp</Label>
-              <Input name='WhatsApp' />
+              <Input name='WhatsApp' keyboardType='number-pad' />
             </FormBox>
 
             <FormImages images={images} setImages={setImages} />
@@ -80,7 +85,7 @@ const CreateOrphanage: React.FC = () => {
               <Switch state={weekend} setState={SetWeekend} />
             </WeekendWrapper>
 
-            <FormButton>
+            <FormButton onPress={() => refForm.current?.submitForm()}>
               <TextButton>Próximo</TextButton>
             </FormButton>
           </Form>

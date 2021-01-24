@@ -1,15 +1,7 @@
 import { TextInput } from 'react-native';
 import styled from 'styled-components/native';
 
-interface iTextInput {
-  refer?: string | ((instance: TextInput | null) => void) | React.RefObject<TextInput> | null | undefined
-}
-
-export const TextLine = styled(TextInput).attrs<iTextInput>(
-  ({ refer }) => ({
-    ref: refer
-  })
-) <iTextInput>`
+export const TextLine = styled(TextInput)`
   border: 1px solid;
   border-radius: 20px;
   
