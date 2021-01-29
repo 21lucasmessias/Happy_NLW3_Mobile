@@ -1,5 +1,7 @@
 import React from 'react';
 
+import * as FileSystem from 'expo-file-system';
+
 import {
   BorderColorPhoto,
   BackGroundColorPhoto,
@@ -8,14 +10,13 @@ import {
   PhotoViewInfoText,
   PhotoName,
   PhotoSize,
-  Photo,
-  PhotoDel,
+  Photo
 } from './styles';
 
 import { AntDesign } from '@expo/vector-icons';
 
 interface iPhotoCard {
-  image: string,
+  image: FileSystem.FileInfo,
   index: number,
   delImageHandler: (number: number) => void
 }
@@ -26,20 +27,19 @@ const PhotoCard: React.FC<iPhotoCard> = ({ image, index, delImageHandler }) => {
       <BackGroundColorPhoto>
         <PhotoView>
           <PhotoInfo>
-            <Photo source={{ uri: image }} />
+            <Photo source={{ uri: image.uri }} />
             <PhotoViewInfoText>
               <PhotoName>
-                X
-            </PhotoName>
+                {image.uri.split('/')[image.uri.split('/').length - 1].split('.')[0].substr(0, 15)}.jpg
+              </PhotoName>
               <PhotoSize>
-                D
-            </PhotoSize>
+                {(image.size as number) / 1000}kbs
+              </PhotoSize>
             </PhotoViewInfoText>
           </PhotoInfo>
 
-          <PhotoDel onPress={() => delImageHandler(index)}>
-            <AntDesign name="close" size={24} color="#FF669D" />
-          </PhotoDel>
+          <AntDesign onPress={() => delImageHandler(index)} name="close" size={24} color="#FF669D" />
+
         </PhotoView>
       </BackGroundColorPhoto>
     </BorderColorPhoto>

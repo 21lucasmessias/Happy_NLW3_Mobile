@@ -70,8 +70,3 @@ export const Photo = styled(Image)`
   background-color: #8FA7B3;
   border-radius: 16px;
 `;
-
-export const PhotoDel = styled.TouchableOpacity`
-  height: 24px;
-  width: 24px;
-`;

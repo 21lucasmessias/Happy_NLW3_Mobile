@@ -3,6 +3,8 @@ import { Platform } from 'react-native';
 
 import * as ImagePicker from 'expo-image-picker';
 
+import * as FileSystem from 'expo-file-system';
+
 import { Feather } from '@expo/vector-icons';
 
 import {
@@ -14,8 +16,8 @@ import {
 import PhotoCard from '../PhotoCard';
 
 interface iFormImages {
-  images: string[],
-  setImages: React.Dispatch<React.SetStateAction<string[]>>
+  images: FileSystem.FileInfo[],
+  setImages: React.Dispatch<React.SetStateAction<FileSystem.FileInfo[]>>
 }
 
 const FormImages: React.FC<iFormImages> = ({ images, setImages }) => {
@@ -23,8 +25,9 @@ const FormImages: React.FC<iFormImages> = ({ images, setImages }) => {
     (async () => {
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestCameraPermissionsAsync();
+
         if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+          alert('Desculpa, precisamos das permissões de câmera para que isso funcione!');
         }
       }
     })();
@@ -33,12 +36,13 @@ const FormImages: React.FC<iFormImages> = ({ images, setImages }) => {
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
 
     if (!result.cancelled) {
-      setImages([...images, result.uri]);
+      const image = await FileSystem.getInfoAsync(result.uri);
+
+      setImages([...images, image]);
     }
   };
 
