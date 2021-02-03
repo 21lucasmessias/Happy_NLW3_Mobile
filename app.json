@@ -22,6 +22,8 @@
     },
     "web": {
       "favicon": "./src/assets/icon.png"
-    }
+    },
+    "description": "A project made while next level week from rocketseat.\nThe objective is help orhpanages to be found.",
+    "githubUrl": "https://github.com/21lucasmessias/Happy_NLW3_Mobile"
   }
 }
