@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { Image, ActivityIndicator } from 'react-native';
 
-import { LocationGeocodedAddress, LocationObject } from 'expo-location';
+import { LocationGeocodedAddress } from 'expo-location';
 import getLocation from '../../utils/GetLocation';
 
 import { useNavigation, CommonActions } from '@react-navigation/native';

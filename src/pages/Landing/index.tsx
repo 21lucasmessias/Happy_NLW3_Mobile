@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
 
 import { LocationObject } from 'expo-location';
 import MapView, { Callout, Marker } from 'react-native-maps';
-
-import Mark from '../../assets/Mark.png';
 
 import { Entypo } from '@expo/vector-icons'
 
@@ -40,8 +38,6 @@ const Landing: React.FC = () => {
         }}>
 
         <Marker
-          icon={Mark}
-
           coordinate={{
             latitude: currentPosition?.coords.latitude ? currentPosition?.coords.latitude : 0,
             longitude: currentPosition?.coords.longitude ? currentPosition?.coords.longitude : 0,
