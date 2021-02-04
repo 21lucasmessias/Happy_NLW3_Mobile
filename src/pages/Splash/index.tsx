@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { Image, ActivityIndicator } from 'react-native';
 
-import { LocationGeocodedAddress } from 'expo-location';
+import { LocationGeocodedAddress, LocationObject } from 'expo-location';
 import getLocation from '../../utils/GetLocation';
 
 import { useNavigation, CommonActions } from '@react-navigation/native';
@@ -28,19 +28,21 @@ const Splash: React.FC = () => {
       if (response) {
         setAdress(response.adress)
 
-        setTimeout(() => {
-          navigation.dispatch(
-            CommonActions.reset({
-              index: 1,
-              routes: [
-                {
-                  name: 'Landing',
-                  params: response.currentPosition
-                },
-              ]
-            })
-          )
-        }, 3000);
+        if (response.currentPosition !== undefined) {
+          setTimeout(() => {
+            navigation.dispatch(
+              CommonActions.reset({
+                index: 1,
+                routes: [
+                  {
+                    name: 'Landing',
+                    params: response.currentPosition
+                  },
+                ]
+              })
+            )
+          }, 3000);
+        }
       }
     })();
   }, []);

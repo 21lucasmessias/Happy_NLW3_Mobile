@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { Dimensions } from 'react-native';
 
@@ -28,8 +28,8 @@ const Landing: React.FC = () => {
     <Container>
       <MapView
         initialRegion={{
-          latitude: currentPosition?.coords.latitude || 0,
-          longitude: currentPosition?.coords.longitude || 0,
+          latitude: currentPosition?.coords.latitude ? currentPosition?.coords.latitude : 0,
+          longitude: currentPosition?.coords.longitude ? currentPosition?.coords.longitude : 0,
           latitudeDelta: 0.0722,
           longitudeDelta: 0.0421,
         }}
@@ -43,8 +43,8 @@ const Landing: React.FC = () => {
           icon={Mark}
 
           coordinate={{
-            latitude: currentPosition?.coords.latitude || 0,
-            longitude: currentPosition?.coords.longitude || 0,
+            latitude: currentPosition?.coords.latitude ? currentPosition?.coords.latitude : 0,
+            longitude: currentPosition?.coords.longitude ? currentPosition?.coords.longitude : 0,
           }}
 
           calloutAnchor={{ x: 2.7, y: 0.8 }}

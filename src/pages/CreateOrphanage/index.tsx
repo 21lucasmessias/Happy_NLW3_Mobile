@@ -4,6 +4,8 @@ import { LatLng } from 'react-native-maps';
 
 import { Form } from '@unform/mobile';
 
+import * as FileSystem from 'expo-file-system';
+
 import FormImages from '../../components/FormImages';
 import Switch from '../../components/Switch';
 import Input from '../../components/Input';
@@ -29,7 +31,7 @@ const CreateOrphanage: React.FC = () => {
   const orphanageLocation = (route.params as LatLng);
 
   const [weekend, SetWeekend] = useState(false);
-  const [images, setImages] = useState<Array<string>>([]);
+  const [images, setImages] = useState<Array<FileSystem.FileInfo>>([]);
 
   const refForm = useRef<FormHandles>(null);
 
